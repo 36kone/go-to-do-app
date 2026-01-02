@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: "postgres"
+    image: postgres:17
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
@@ -8,9 +8,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql
 
-  pgadmin-compose:
+  pgadmin:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: "test@test.com"
@@ -19,6 +19,7 @@ services:
       - "54321:80"
     depends_on:
       - postgres
+    restart: always
 
 volumes:
   postgres-data:
